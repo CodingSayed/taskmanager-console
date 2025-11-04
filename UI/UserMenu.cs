@@ -3,11 +3,11 @@ namespace ToDoList.UI;
 
 public class UserMenu
 {
-    public TaskMenu _taskMenu;
+    public ItemMenu _itemMenu;
    
-    public UserMenu(TaskMenu taskMenu)
+    public UserMenu(ItemMenu itemMenu)
     {   
-        _taskMenu = taskMenu;
+        _itemMenu = itemMenu;
     }
 
     public void Show()
@@ -24,7 +24,7 @@ public class UserMenu
 
             switch (input)
             {
-                case "1": _taskMenu.Show(); break;
+                case "1": _itemMenu.Show(); break;
                 case "2": Console.WriteLine("Welcome to User Settings"); Console.ReadLine(); break;
                 case "0": return;
                 default: Console.WriteLine("Invalid Option"); break;

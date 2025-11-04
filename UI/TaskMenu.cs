@@ -3,13 +3,13 @@ using ToDoList.Services;
 
 namespace ToDoList.UI;
 
-public class TaskMenu
+public class ItemMenu
 {
     Item item = new Item();
     private readonly ItemService _itemService;
     private readonly ConsoleHelpers _consoleHelpers;
 
-    public TaskMenu(ItemService itemService, ConsoleHelpers consoleHelpers)
+    public ItemMenu(ItemService itemService, ConsoleHelpers consoleHelpers)
     {
         _itemService = itemService;
         _consoleHelpers = consoleHelpers;
@@ -42,13 +42,35 @@ public class TaskMenu
 
     public Item Create()
     {
-        var id = int.Parse(_consoleHelpers.PromptString("Id"));
+        Console.Clear();
+        List();
+        var id = _consoleHelpers.PromptInt("Id");
         var name = _consoleHelpers.PromptString("Name");
         var priority = _consoleHelpers.PromptString("Priority (High | Medium | Low)");
         var status  = _consoleHelpers.PromptString("Status (Finished | In Progress | On Hold)");
-        var deadline = DateTime.Now.Date;
+
+        var deadlineInput = _consoleHelpers.PromptString("Deadline (yyyy-MM-dd)");
+        DateTime? deadline = null;
+        if (!string.IsNullOrEmpty(deadlineInput))
+        {
+            DateTime parsedDate;
+            while (!DateTime.TryParse(deadlineInput, out parsedDate))
+            {
+                Console.WriteLine("Invalid date format. Use (yyyy-MM-dd)");
+                deadlineInput = _consoleHelpers.PromptString("Deadline (yyyy-MM-dd)");
+                if (string.IsNullOrWhiteSpace(deadlineInput)) break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(deadlineInput))
+            {
+                deadline = parsedDate;
+            }
+            
+        }
+
         var description = _consoleHelpers.PromptString("Description");
         var type = _consoleHelpers.PromptString("Type (Single | Multi)");
+
 
         _itemService.Create(id, name, priority, status, deadline, description, type);
 
@@ -76,11 +98,30 @@ public class TaskMenu
     {
         Console.Clear();
         List();
-        var id = int.Parse(_consoleHelpers.PromptString("Id"));
+        var id = _consoleHelpers.PromptInt("Id");
         var name = _consoleHelpers.PromptString("Name");
         var priority = _consoleHelpers.PromptString("Priority (High | Medium | Low)");
         var status = _consoleHelpers.PromptString("Status (Finished | In Progress | On Hold)");
-        var deadline = DateTime.Now.Date;
+
+        var deadlineInput = _consoleHelpers.PromptString("Deadline (yyyy-MM-dd)");
+        DateTime? deadline = null;
+        if (!string.IsNullOrEmpty(deadlineInput))
+        {
+            DateTime parsedDate;
+            while (!DateTime.TryParse(deadlineInput, out parsedDate))
+            {
+                Console.WriteLine("Invalid date format. Use (yyyy-MM-dd)");
+                deadlineInput = _consoleHelpers.PromptString("Deadline (yyyy-MM-dd)");
+                if (string.IsNullOrWhiteSpace(deadlineInput)) break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(deadlineInput))
+            {
+                deadline = parsedDate;
+            }
+            
+        }
+        
         var description = _consoleHelpers.PromptString("Description");
         var type = _consoleHelpers.PromptString("Type (Single | Multi)");
 
@@ -91,7 +132,7 @@ public class TaskMenu
     {
         Console.Clear();
         List();
-        var id = int.Parse(_consoleHelpers.PromptString("Id"));
+        var id = _consoleHelpers.PromptInt("Id");
         if (!_consoleHelpers.Confirm("Are you sure you want to delete remove this?")) return;
             
         _itemService.Delete(id);
