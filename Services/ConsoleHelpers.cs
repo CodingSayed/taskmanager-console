@@ -37,4 +37,14 @@ public class ConsoleHelpers
             if (s == "n" | s == "no") return false;
         }
     }
+
+    public string GetDashes(string s)
+    {
+        string line = "";
+        for (int i = 0; i < s.Length; i++)
+        {
+            line += "-";
+        }
+        return line;
+    }
 }

@@ -63,7 +63,7 @@ public class ItemMenu
 
             if (!string.IsNullOrWhiteSpace(deadlineInput))
             {
-                deadline = parsedDate;
+                deadline = parsedDate.Date;
             }
             
         }
@@ -79,19 +79,21 @@ public class ItemMenu
 
     public void List()
     {
+        string firstRow = $"| {"#",-4}| {"Name",-30}| {"Priority",-10}| {"Status",-15}| {"Deadline",-15}|";
         Console.WriteLine($"Today is {DateTime.Today.DayOfWeek} {DateOnly.FromDateTime(DateTime.Today)}\n");
-        Console.WriteLine($"{"#",-4}| {"Name",-30}| {"Priority",-10}| {"Status",-15}| {"Deadline"}");
-        Console.WriteLine("------------------------------------------------------------------------------------");
+        Console.WriteLine(_consoleHelpers.GetDashes(firstRow));
+        Console.WriteLine(firstRow);
+        Console.WriteLine(_consoleHelpers.GetDashes(firstRow));
 
         var items = _itemService.GetAll();
         if (items.Count == 0) Console.WriteLine("No items Found");
 
         foreach (var item in items)
         {
-            Console.WriteLine($"{item.Id,-4}| {item.Name,-30}| {item.Priority,-10}| {item.Status,-15}| {item.Deadline}");
+            Console.WriteLine($"| {item.Id,-4}| {item.Name,-30}| {item.Priority,-10}| {item.Status,-15}| {item.Deadline,-15:dd/MM/yyyy}|");
 
         }
-        Console.WriteLine("\n");
+        Console.WriteLine(_consoleHelpers.GetDashes(firstRow));
     }
 
     public void Update()
@@ -117,7 +119,7 @@ public class ItemMenu
 
             if (!string.IsNullOrWhiteSpace(deadlineInput))
             {
-                deadline = parsedDate;
+                deadline = parsedDate.Date;
             }
             
         }
