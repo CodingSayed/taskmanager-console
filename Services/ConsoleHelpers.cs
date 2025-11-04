@@ -47,4 +47,36 @@ public class ConsoleHelpers
         }
         return line;
     }
+
+    public TEnum ParseEnumOrReprompt<TEnum>(string label, string? defaultValue = null) where TEnum : struct, Enum
+    {
+        while (true)
+        {
+            var raw = PromptString(label, defaultValue);
+            var s = raw.Trim();
+
+            if (string.IsNullOrWhiteSpace(s))
+                return default; // e.g. None
+
+            s = s.Replace(" ", "").Replace("-", "");
+            if (Enum.TryParse<TEnum>(s, true, out var value))
+                return value;
+
+            Console.WriteLine($"Invalid value. Allowed: {string.Join(" | ", Enum.GetNames(typeof(TEnum)))}");
+        }
+    }
+
+    public TEnum? ParseNullableEnumOrSkip<TEnum>(string label) where TEnum : struct, Enum
+    {
+        var raw = PromptString(label);
+        var s = raw.Trim();
+        if (string.IsNullOrWhiteSpace(s)) return null;
+
+        s = s.Replace(" ", "").Replace("-", "");
+        if (Enum.TryParse<TEnum>(s, true, out var value))
+            return value;
+
+        Console.WriteLine($"Invalid value. Allowed: {string.Join(" | ", Enum.GetNames(typeof(TEnum)))}");
+        return ParseNullableEnumOrSkip<TEnum>(label); // re-prompt
+    }
 }

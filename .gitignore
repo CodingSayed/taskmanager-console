@@ -29,6 +29,10 @@
 *.sqlite
 *.sqlite3
 
+# SQLite temporary files (WAL mode)
+*.db-shm
+*.db-wal
+
 # If you want to keep a seed database file, comment the line above and track a single file:
 # !app_template.db
 

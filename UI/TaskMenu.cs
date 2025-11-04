@@ -46,8 +46,8 @@ public class ItemMenu
         List();
         var id = _consoleHelpers.PromptInt("Id");
         var name = _consoleHelpers.PromptString("Name");
-        var priority = _consoleHelpers.PromptString("Priority (High | Medium | Low)");
-        var status  = _consoleHelpers.PromptString("Status (Finished | In Progress | On Hold)");
+        var priority = _consoleHelpers.ParseEnumOrReprompt<Item.Priority>("Priority (High | Medium | Low | None)");
+        var status = _consoleHelpers.ParseEnumOrReprompt<Item.Status>("Status (Finished | In Progress | On Hold | None)");
 
         var deadlineInput = _consoleHelpers.PromptString("Deadline (yyyy-MM-dd)");
         DateTime? deadline = null;
@@ -69,8 +69,7 @@ public class ItemMenu
         }
 
         var description = _consoleHelpers.PromptString("Description");
-        var type = _consoleHelpers.PromptString("Type (Single | Multi)");
-
+        var type = _consoleHelpers.ParseEnumOrReprompt<Item.ItemKind>("Type (Single | Multi)");
 
         _itemService.Create(id, name, priority, status, deadline, description, type);
 
@@ -86,26 +85,26 @@ public class ItemMenu
         Console.WriteLine(_consoleHelpers.GetDashes(firstRow));
 
         var items = _itemService.GetAll();
-        if (items.Count == 0) Console.WriteLine("No items Found");
+        if (items.Count == 0) Console.WriteLine("No items Found" + "\n");
 
         foreach (var item in items)
         {
-            Console.WriteLine($"| {item.Id,-4}| {item.Name,-30}| {item.Priority,-10}| {item.Status,-15}| {item.Deadline,-15:dd/MM/yyyy}|");
+            Console.WriteLine($"| {item.Id,-4}| {item.Name,-30}| {item.PriorityLevel,-10}| {item.CurrentStatus,-15}| {item.Deadline,-15:dd/MM/yyyy}|");
 
         }
-        Console.WriteLine(_consoleHelpers.GetDashes(firstRow));
+        Console.WriteLine(_consoleHelpers.GetDashes(firstRow) + "\n");
     }
 
     public void Update()
     {
         Console.Clear();
         List();
-        var id = _consoleHelpers.PromptInt("Id");
-        var name = _consoleHelpers.PromptString("Name");
-        var priority = _consoleHelpers.PromptString("Priority (High | Medium | Low)");
-        var status = _consoleHelpers.PromptString("Status (Finished | In Progress | On Hold)");
+        int id = _consoleHelpers.PromptInt("Id");
+        string name = _consoleHelpers.PromptString("Name");
+        Item.Priority? priority = _consoleHelpers.ParseNullableEnumOrSkip<Item.Priority>("Priority (High | Medium | Low | None) — leave empty to keep");
+        Item.Status? status = _consoleHelpers.ParseNullableEnumOrSkip<Item.Status>("Status (Finished | In Progress | On Hold | None) — leave empty to keep");
 
-        var deadlineInput = _consoleHelpers.PromptString("Deadline (yyyy-MM-dd)");
+        string? deadlineInput = _consoleHelpers.PromptString("Deadline (yyyy-MM-dd)");
         DateTime? deadline = null;
         if (!string.IsNullOrEmpty(deadlineInput))
         {
@@ -124,8 +123,8 @@ public class ItemMenu
             
         }
         
-        var description = _consoleHelpers.PromptString("Description");
-        var type = _consoleHelpers.PromptString("Type (Single | Multi)");
+        string? description = _consoleHelpers.PromptString("Description");
+        Item.ItemKind? type = _consoleHelpers.ParseNullableEnumOrSkip<Item.ItemKind>("Type (Single | Multi) — leave empty to keep");
 
         _itemService.Update(id, name, priority, status, deadline, description, type);
     }

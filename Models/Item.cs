@@ -4,11 +4,16 @@ public class Item
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";
-    public string? Priority { get; set; } = ""; // High | Medium | Low | {empty}
-    public string? Status { get; set; } = "On Hold";  // Finished | In Progress | On Hold | {empty}
+    public Priority? PriorityLevel { get; set; }
+    public Status? CurrentStatus { get; set; }
     public DateTime? Deadline { get; set; }
-    public string? Description { get; set; } = "";
+    public string? Description { get; set; }
+    public ItemKind? Kind { get; set; }
 
-    public string Type { get; set;} =""; // Single | Multi -> Enum???
-    //public Item[]? Items{ get; set; } // For multi implement later
+
+    public enum Priority { None, High, Medium, Low }
+    public enum Status { None, Finished, InProgress, OnHold }
+    public enum ItemKind { Single, Multi }
+
 }
+

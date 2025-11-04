@@ -21,9 +21,20 @@ public class AppDbContext : DbContext
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<Item>().ToTable("Items");
-}
+    {
+        modelBuilder.Entity<Item>()
+        .Property(i => i.PriorityLevel)
+        .HasConversion<string>();
+
+        modelBuilder.Entity<Item>()
+            .Property(i => i.CurrentStatus)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Item>()
+            .Property(i => i.Kind)
+            .HasConversion<string>();
+    }
+    
 
 
 }
