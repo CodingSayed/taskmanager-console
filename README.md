@@ -14,19 +14,19 @@ Current version: **v0.9.0-alpha**
 Stack: C#, Console, SQLite
 Simple task management. Each task is a singular item. It can be created, modified, and deleted.
 
-- **v2.0.0 "Banette**
+- **v1.1.0 "Banette**
 Stack: C#, Console, SQLite
 Slightly more advanced tasks. Some tasks will contain a collection of tasks
 
-- **v3.0.0 "Chansey"**
+- **v1.2.0 "Chansey"**
 Stack: C#, Console, SQLite
 Login / Register implemented
 
-- **v4.0.0 "Deoxys"**
+- **v2.0.0 "Deoxys"**
 Stack: C#, Console, (Database: mySQL / PostGRES / MongoDb) => maybe connectionless?
 New database: Connection-based or connectionless
 
-- **v5.0.0 "Entei"**
+- **v3.0.0 "Entei"**
 Stack: C#, Console, Database?
 Login / Register implemented
 Adding UI (Front End)

@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 var appDbContext = new AppDbContext();
 var itemService = new ItemService(appDbContext);
 var consoleHelpers = new ConsoleHelpers();
-var taskMenu = new TaskMenu(itemService, consoleHelpers);
-var userMenu = new UserMenu(taskMenu);
+var itemMenu = new ItemMenu(itemService, consoleHelpers);
+var userMenu = new UserMenu(itemMenu);
 var loginMenu = new LoginMenu(userMenu);
 var registerMenu = new RegisterMenu();
 

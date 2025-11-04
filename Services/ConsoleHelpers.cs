@@ -9,6 +9,21 @@ public class ConsoleHelpers
         return string.IsNullOrWhiteSpace(s) ? (defaultValue ?? "") : s.Trim();
     }
 
+    public int PromptInt(string label, int? defaultValue = null, int? min = null, int? max = null)
+    {
+        while (true)
+        {
+            var raw = PromptString(label, defaultValue?.ToString());
+            if (int.TryParse(raw, out var value) &&
+                (min is null || value >= min) &&
+                (max is null || value <= max))
+                return value;
+
+            Console.WriteLine("Please enter a valid integer value");
+        }
+    }
+
+
     public bool Confirm(string label, bool defaultYes = true)
     {
         var suffix = defaultYes ? " [Y/n]" : " [y/N]";
