@@ -1,0 +1,42 @@
+# Build results
+/bin/
+/obj/
+/out/
+
+# Visual Studio user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# NuGet packages
+*.nupkg
+# The following line ensures that NuGet restore works properly
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Entity Framework / Migrations temp files
+*.cache
+*.log
+*.ldb
+
+# SQLite database files
+*.db
+*.sqlite
+*.sqlite3
+
+# If you want to keep a seed database file, comment the line above and track a single file:
+# !app_template.db
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Other temp files
+*.tmp
+*.bak
+*.swp
