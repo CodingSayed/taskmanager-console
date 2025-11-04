@@ -33,7 +33,7 @@ public class TaskMenu
             {
                 case "1": Create(); break;
                 case "2": Update(); break;
-                case "3": Console.WriteLine("Delete task PH"); break;
+                case "3": Delete(); break;
                 case "0": return;
                 default: Console.WriteLine("Invalid Option"); break;
             }
@@ -71,7 +71,7 @@ public class TaskMenu
         }
         Console.WriteLine("\n");
     }
-    
+
     public void Update()
     {
         Console.Clear();
@@ -79,7 +79,7 @@ public class TaskMenu
         var id = int.Parse(_consoleHelpers.PromptString("Id"));
         var name = _consoleHelpers.PromptString("Name");
         var priority = _consoleHelpers.PromptString("Priority (High | Medium | Low)");
-        var status  = _consoleHelpers.PromptString("Status (Finished | In Progress | On Hold)");
+        var status = _consoleHelpers.PromptString("Status (Finished | In Progress | On Hold)");
         var deadline = DateTime.Now.Date;
         var description = _consoleHelpers.PromptString("Description");
         var type = _consoleHelpers.PromptString("Type (Single | Multi)");
@@ -87,4 +87,15 @@ public class TaskMenu
         _itemService.Update(id, name, priority, status, deadline, description, type);
     }
     
+    public void Delete()
+    {
+        Console.Clear();
+        List();
+        var id = int.Parse(_consoleHelpers.PromptString("Id"));
+        if (!_consoleHelpers.Confirm("Are you sure you want to delete remove this?")) return;
+            
+        _itemService.Delete(id);
+        Console.WriteLine($"Task with id: {id} has been deleted");
+        Console.ReadLine();
+    }
 }

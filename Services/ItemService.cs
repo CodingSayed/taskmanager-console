@@ -31,14 +31,19 @@ public class ItemService
         var item = _db.Items.FirstOrDefault(x => x.Id == id)
             ?? throw new Exception("Item does not exist");
 
-        if(!string.IsNullOrWhiteSpace(name)) item.Name = name;
-        if(!string.IsNullOrWhiteSpace(priority)) item.Priority = priority;
-        if(!string.IsNullOrWhiteSpace(status)) item.Status = status;
-        if(deadline.HasValue) item.Deadline = deadline;
-        if(!string.IsNullOrWhiteSpace(description)) item.Description = description;
+        if (!string.IsNullOrWhiteSpace(name)) item.Name = name;
+        if (!string.IsNullOrWhiteSpace(priority)) item.Priority = priority;
+        if (!string.IsNullOrWhiteSpace(status)) item.Status = status;
+        if (deadline.HasValue) item.Deadline = deadline;
+        if (!string.IsNullOrWhiteSpace(description)) item.Description = description;
         if (!string.IsNullOrWhiteSpace(type)) item.Type = type;
         _db.SaveChanges();
-    
     }
     
+    public void Delete(int id)
+    {
+        var item = _db.Items.FirstOrDefault(x => x.Id == id) ?? throw new Exception("Item not found");
+        _db.Items.Remove(item);
+        _db.SaveChanges();
+    }   
 }
