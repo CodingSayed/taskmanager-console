@@ -10,7 +10,7 @@ All planned versions are listed here, currently working towards v1.0.0.
 
 Current version: **v0.9.0-alpha**
 
-- **v1.0.0 "Absol"** 
+- **v1.0.0 "Absol"**
 Stack: C#, Console, SQLite
 Simple task management. Each task is a singular item. It can be created, modified, and deleted.
 

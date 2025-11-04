@@ -9,7 +9,6 @@ public class Item
     public DateTime? Deadline { get; set; }
     public string? Description { get; set; } = "";
 
-
     public string Type { get; set;} =""; // Single | Multi -> Enum???
     //public Item[]? Items{ get; set; } // For multi implement later
 }
