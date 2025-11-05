@@ -4,8 +4,8 @@ namespace ToDoList.UI;
 
 public class RegisterMenu
 {
-    public ConsoleHelpers _consoleHelpers;
-    public RegisterService _registerService;
+    private readonly ConsoleHelpers _consoleHelpers;
+    private readonly RegisterService _registerService;
     public RegisterMenu(ConsoleHelpers consoleHelpers, RegisterService registerService)
     {
         _consoleHelpers = consoleHelpers;
@@ -18,7 +18,7 @@ public class RegisterMenu
         {
             
             Console.Clear();
-            Console.WriteLine("Register");
+            Console.WriteLine("== Register ==");
             Console.WriteLine("Create account\n");
 
             var username = _consoleHelpers.PromptString("Username");

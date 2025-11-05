@@ -18,7 +18,7 @@ public class MainMenu
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Welcome to the To-Do Application");
+            Console.WriteLine("== Welcome to the To-Do Application ==");
             Console.WriteLine("What would you like to do?\n");
             Console.WriteLine("1) Login");
             Console.WriteLine("2) Register");
@@ -34,8 +34,5 @@ public class MainMenu
                 default: Console.WriteLine("Invalid Option"); break;
             }
         }
-
     }
-
-
 }
