@@ -26,6 +26,10 @@ Current version: **v0.9.2-alpha**
 - Login / Register / Users implemented
 
 
+- **v1.0.0 "Absol"**
+Stack: C#, Console, SQLite
+Login / Register / Users implemented
+
 - **v1.1.0 "Banette**
 - Stack: C#, Console, SQLite
 - Slightly more advanced tasks. Some tasks will contain a collection of tasks
