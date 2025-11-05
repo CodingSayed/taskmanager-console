@@ -7,7 +7,8 @@ namespace ToDoList.Data;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Item> Items { get; set; }
+    public DbSet<User> Users => Set<User>();
+    public DbSet<Item> Items => Set<Item>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -22,6 +23,20 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<User>()
+        .HasIndex(u => u.UserName)
+        .IsUnique();
+
+        modelBuilder.Entity<Item>()
+        .HasOne(i => i.User)
+        .WithMany(u => u.Items)
+        .HasForeignKey(i => i.UserId)
+        .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Item>()
+            .HasIndex(i => new { i.UserId, i.UserTaskNumber })
+            .IsUnique();
+
         modelBuilder.Entity<Item>()
         .Property(i => i.PriorityLevel)
         .HasConversion<string>();
@@ -34,7 +49,5 @@ public class AppDbContext : DbContext
             .Property(i => i.Kind)
             .HasConversion<string>();
     }
-    
-
 
 }
