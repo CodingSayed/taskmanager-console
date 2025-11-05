@@ -29,7 +29,7 @@ public class MainMenu
             switch (input)
             {
                 case "1": _loginMenu.Show(); break;
-                case "2": _registerMenu.Show();  break;
+                case "2": _registerMenu.Register();  break;
                 case "0": return;
                 default: Console.WriteLine("Invalid Option"); break;
             }

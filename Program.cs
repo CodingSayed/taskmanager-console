@@ -9,7 +9,8 @@ var consoleHelpers = new ConsoleHelpers();
 var itemMenu = new ItemMenu(itemService, consoleHelpers);
 var userMenu = new UserMenu(itemMenu);
 var loginMenu = new LoginMenu(userMenu);
-var registerMenu = new RegisterMenu();
+var registerService = new RegisterService(appDbContext);
+var registerMenu = new RegisterMenu(consoleHelpers, registerService);
 
 var mainMenu = new MainMenu(loginMenu, registerMenu);
 

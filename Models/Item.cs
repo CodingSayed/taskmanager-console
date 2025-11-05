@@ -3,6 +3,11 @@ namespace ToDoList.Models;
 public class Item
 {
     public int Id { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; } = default!;
+    
+
+    public int UserTaskNumber { get; set; }
     public string Name { get; set; } = "";
     public Priority? PriorityLevel { get; set; }
     public Status? CurrentStatus { get; set; }

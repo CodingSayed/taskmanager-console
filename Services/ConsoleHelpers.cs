@@ -79,4 +79,30 @@ public class ConsoleHelpers
         Console.WriteLine($"Invalid value. Allowed: {string.Join(" | ", Enum.GetNames(typeof(TEnum)))}");
         return ParseNullableEnumOrSkip<TEnum>(label); // re-prompt
     }
+
+    public string PromptPassword(string label)
+    {
+        Console.Write($"{label}: ");
+        var password = new System.Text.StringBuilder();
+        ConsoleKeyInfo key;
+
+        while ((key = Console.ReadKey(intercept: true)).Key != ConsoleKey.Enter)
+        {
+            if (key.Key == ConsoleKey.Backspace)
+            {
+                if (password.Length > 0)
+                {
+                    password.Length--;
+                    Console.Write("\b \b");
+                }
+            }
+            else if (!char.IsControl(key.KeyChar))
+            {
+                password.Append(key.KeyChar);
+                Console.Write("*");
+            }
+        }
+        Console.WriteLine();
+        return password.ToString();
+    }
 }
