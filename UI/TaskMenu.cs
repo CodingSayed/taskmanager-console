@@ -44,7 +44,7 @@ public class ItemMenu
     {
         Console.Clear();
         List();
-        var id = _consoleHelpers.PromptInt("Id");
+
         var name = _consoleHelpers.PromptString("Name");
         var priority = _consoleHelpers.ParseEnumOrReprompt<Item.Priority>("Priority (High | Medium | Low | None)");
         var status = _consoleHelpers.ParseEnumOrReprompt<Item.Status>("Status (Finished | In Progress | On Hold | None)");
@@ -71,25 +71,27 @@ public class ItemMenu
         var description = _consoleHelpers.PromptString("Description");
         var type = _consoleHelpers.ParseEnumOrReprompt<Item.ItemKind>("Type (Single | Multi)");
 
-        _itemService.Create(id, name, priority, status, deadline, description, type);
-
-        return item;
+        var created = _itemService.Create(name, priority, status, deadline, description, type);
+        Console.WriteLine($"\nCreated task #{created.UserTaskNumber}");
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
+        return created;
     }
 
     public void List()
     {
-        string firstRow = $"| {"#",-4}| {"Name",-30}| {"Priority",-10}| {"Status",-15}| {"Deadline",-15}|";
-        Console.WriteLine($"Today is {DateTime.Today.DayOfWeek} {DateOnly.FromDateTime(DateTime.Today)}\n");
+        string firstRow = $"| {"#",-4}| {"Name",-40}| {"Priority",-10}| {"Status",-15}| {"Deadline",-15}|";
+        Console.WriteLine($"== Today is {DateTime.Today.DayOfWeek} {DateOnly.FromDateTime(DateTime.Today)} ==\n");
         Console.WriteLine(_consoleHelpers.GetDashes(firstRow));
         Console.WriteLine(firstRow);
         Console.WriteLine(_consoleHelpers.GetDashes(firstRow));
 
         var items = _itemService.GetAll();
-        if (items.Count == 0) Console.WriteLine("No items Found" + "\n");
+        if (items.Count == 0) Console.WriteLine("No items Found\n");
 
         foreach (var item in items)
         {
-            Console.WriteLine($"| {item.Id,-4}| {item.Name,-30}| {item.PriorityLevel,-10}| {item.CurrentStatus,-15}| {item.Deadline,-15:dd/MM/yyyy}|");
+            Console.WriteLine($"| {item.UserTaskNumber,-4}| {item.Name,-40}| {item.PriorityLevel,-10}| {item.CurrentStatus,-15}| {item.Deadline,-15:dd/MM/yyyy}|");
 
         }
         Console.WriteLine(_consoleHelpers.GetDashes(firstRow) + "\n");
@@ -99,7 +101,7 @@ public class ItemMenu
     {
         Console.Clear();
         List();
-        int id = _consoleHelpers.PromptInt("Id");
+        int taskNumber = _consoleHelpers.PromptInt("Task #");
         string name = _consoleHelpers.PromptString("Name");
         Item.Priority? priority = _consoleHelpers.ParseNullableEnumOrSkip<Item.Priority>("Priority (High | Medium | Low | None) — leave empty to keep");
         Item.Status? status = _consoleHelpers.ParseNullableEnumOrSkip<Item.Status>("Status (Finished | In Progress | On Hold | None) — leave empty to keep");
@@ -126,18 +128,21 @@ public class ItemMenu
         string? description = _consoleHelpers.PromptString("Description");
         Item.ItemKind? type = _consoleHelpers.ParseNullableEnumOrSkip<Item.ItemKind>("Type (Single | Multi) — leave empty to keep");
 
-        _itemService.Update(id, name, priority, status, deadline, description, type);
+        bool updated = _itemService.Update(taskNumber, name, priority, status, deadline, description, type);
+        Console.WriteLine(updated ? "\nUpdated" : "\nTask not found");
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
     }
     
     public void Delete()
     {
         Console.Clear();
         List();
-        var id = _consoleHelpers.PromptInt("Id");
+        int taskNumber = _consoleHelpers.PromptInt("Task #");
         if (!_consoleHelpers.Confirm("Are you sure you want to delete remove this?")) return;
             
-        _itemService.Delete(id);
-        Console.WriteLine($"Task with id: {id} has been deleted");
+        bool deleted = _itemService.Delete(taskNumber);
+        Console.WriteLine(deleted ? $"Task #{taskNumber} has been deleted" : "Task not found");
         Console.ReadLine();
     }
 }
