@@ -1,28 +1,43 @@
+using ToDoList.Services;
+
 namespace ToDoList.UI;
 
 public class LoginMenu
 {
-    public UserMenu _userMenu;
-    public LoginMenu(UserMenu userMenu)
+    private readonly LoginService _loginService;
+    private readonly ConsoleHelpers _consoleHelpers;
+    private readonly UserMenu _userMenu;
+   
+    public LoginMenu(LoginService loginService, ConsoleHelpers consoleHelpers, UserMenu userMenu)
     {
-        _userMenu = userMenu;
+        _loginService = loginService;
+        _consoleHelpers = consoleHelpers;
+        _userMenu = userMenu; 
     }
     
-    public void Show()
+   public void Show()
     {
-        Console.Clear();
-        Console.WriteLine("Login Page (TO DO)\n");
-        Console.WriteLine("1) for continue");
-        Console.WriteLine("0) Exit");
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("== Login ==\n");
 
-        var input = (Console.ReadLine() ?? "").Trim();
+            var userName = _consoleHelpers.PromptString("Username");
+            var password = _consoleHelpers.PromptPassword("Password");
 
-            switch (input)
+            if (_loginService.Login(userName, password, out var error))
             {
-                case "1": _userMenu.Show(); break;
-                case "0": return;
-                default: Console.WriteLine("Invalid Option"); break;
+                Console.WriteLine($"\nWelcome, {userName}!");
+                Console.WriteLine("Press Enter to continue...");
+                Console.ReadLine();
+
+                _userMenu.Show();
+                return;
             }
 
+            Console.WriteLine($"\n {error}");
+            if (!_consoleHelpers.Confirm("Try again?", defaultYes: true))
+                return;
+        }
     }
 }
