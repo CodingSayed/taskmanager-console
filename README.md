@@ -6,16 +6,16 @@ I will start this project simple, and eventually make it more advanced as I fini
 
 ## Upcoming Features
 
-The features listed here will be depolyed before reaching the next version (**v1.0.0**):
+The features listed here will be deployed before reaching the next version (**v1.1.0**):
 
-- TaskMenu -> ItemMenu
-- Testing
+- Tasks can contain tasks
+- User Account Settings: Update, Delete
 
 ## Versions
 
 All planned versions are listed here, currently working towards v1.0.0.
 
-Current version: **v0.9.2-alpha**
+Current version: **v1.0.0 "Absol"**
 
 - **v0.9.1**
 - Stack: C#, Console, SQLite
@@ -30,10 +30,14 @@ Current version: **v0.9.2-alpha**
 Stack: C#, Console, SQLite
 Login / Register / Users implemented
 
+- **v1.0.0 "Absol"**
+Stack: C#, Console, SQLite
+Login / Register / Users implemented
+
 - **v1.1.0 "Banette**
-- Stack: C#, Console, SQLite
-- Slightly more advanced tasks. Some tasks will contain a collection of tasks
-- Users will be able to change their account settings
+Stack: C#, Console, SQLite
+Slightly more advanced tasks. Some tasks will contain a collection of tasks
+Users will be able to change their account settings
 
 - **v1.2.0 "Chansey"** ---------
 - Stack: C#, Console, SQLite

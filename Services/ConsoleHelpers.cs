@@ -56,7 +56,7 @@ public class ConsoleHelpers
             var s = raw.Trim();
 
             if (string.IsNullOrWhiteSpace(s))
-                return default; // e.g. None
+                return default;
 
             s = s.Replace(" ", "").Replace("-", "");
             if (Enum.TryParse<TEnum>(s, true, out var value))
@@ -77,7 +77,7 @@ public class ConsoleHelpers
             return value;
 
         Console.WriteLine($"Invalid value. Allowed: {string.Join(" | ", Enum.GetNames(typeof(TEnum)))}");
-        return ParseNullableEnumOrSkip<TEnum>(label); // re-prompt
+        return ParseNullableEnumOrSkip<TEnum>(label);
     }
 
     public string PromptPassword(string label)

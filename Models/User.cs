@@ -9,5 +9,4 @@ public class User
     public string PasswordHash { get; set; } = "";
 
     public ICollection<Item> Items { get; set; } = new List<Item>();
-
 }
