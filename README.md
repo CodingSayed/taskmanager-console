@@ -1,4 +1,4 @@
-# Welcome to the 'To-Do-List' Application
+# Welcome to the TaskManager Application
 
 This is a simple C# console application which used Entity Framework Core and SQLite.
 This app serves as purpose to refresh my skills in C# and practice SQL.
