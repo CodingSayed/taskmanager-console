@@ -5,7 +5,6 @@ namespace ToDoList.UI;
 
 public class ItemMenu
 {
-    Item item = new Item();
     private readonly ItemService _itemService;
     private readonly ConsoleHelpers _consoleHelpers;
 
@@ -25,7 +24,6 @@ public class ItemMenu
             Console.WriteLine("2) Edit task");
             Console.WriteLine("3) Delete task");
             Console.WriteLine("0) Exit");
-
 
             var input = (Console.ReadLine() ?? "").Trim();
 

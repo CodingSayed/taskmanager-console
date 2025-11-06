@@ -2,7 +2,6 @@ using ToDoList.Services;
 
 namespace ToDoList.UI;
 
-
 public class UserMenu
 {
     private readonly ItemMenu _itemMenu;
@@ -35,8 +34,5 @@ public class UserMenu
                 default: Console.WriteLine("Invalid Option"); break;
             }
         }
-
     }
-
-
 }

@@ -1,5 +1,4 @@
 using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Models;
 
@@ -16,8 +15,6 @@ public class RegisterService
     }
 
     public bool UsernameAvailable(string username) => !_db.Users.Any(u => u.UserName == username);
-
-
 
     public User Register(string username, string? firstName, string? lastName, string password)
     {
