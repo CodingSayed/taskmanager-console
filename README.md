@@ -1,8 +1,8 @@
-# Welcome to the TaskManager Application
+# TaskManager Console (v1.0.0 "Absol")
 
-This is a simple C# console application which used Entity Framework Core and SQLite.
-This app serves as purpose to refresh my skills in C# and practice SQL.
-I will start this project simple, and eventually make it more advanced as I finish every stage.
+A simple C# console application built with Entity Framework Core and SQLite.
+Created to refresh my C# skills and practice database management. 
+I will start this project simple, and expands each version growing more advanced with every stage.
 
 ## Upcoming Features
 
